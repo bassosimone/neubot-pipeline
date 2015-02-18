@@ -1,14 +1,39 @@
 #!/bin/sh -e
 
+
 ALL_TARFILES=all_mlab_tarfiles.txt
 BASEURL=https://commondatastorage.googleapis.com
+BINDIR=$(cd "$(dirname $0)"; pwd)
 DELAY=3
 DESTDIR=data/raw
+KEEP=""
 
 if [ $# -eq 0 ]; then
-    echo "usage: $0 project/year/month..." 1>&2
+    echo "usage: $0 [-k] project/year/month..." 1>&2
     exit 1
 fi
+
+ARGUMENTS=$(getopt k $*)
+if [ $? -ne 0 ]; then
+    echo "usage: $0 [-k] project/year/month..." 1>&2
+    exit 1
+fi
+set -- $ARGUMENTS
+while [ $# -ne 0 ]; do
+    case "$1" in
+        -k)
+            KEEP="yes"
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "usage: $0 [-k] project/year/month..." 1>&2
+            exit 1
+    esac
+done
 
 (
     test -d $DESTDIR || install -d $DESTDIR
@@ -28,6 +53,10 @@ fi
                 BASE=`basename $TARBALL_URI`
                 test -f $BASE || {
                     wget -N $TARBALL_URI || true
+                    $BINDIR/trigger_pipeline $BASE
+                    if [ "$KEEP" != "yes" ]; then
+                        rm -f $BASE
+                    fi
                     sleep $DELAY
                 }
             )

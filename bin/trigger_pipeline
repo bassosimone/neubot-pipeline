@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+if [ $# -ne 1 ]; then
+    echo "usage: $0 file" 1>&2
+    exit 1
+fi
+
+ROOTDIR=$(cd $(dirname $(dirname $0)); pwd)
+
+export OONI_GEOIP_DIR=$ROOTDIR/data/geoip
+export OONI_RAW_DIR=.
+export OONI_LOG_LEVEL=DEBUG
+
+$ROOTDIR/ooni-pipeline/bin/oonipipeline preprocess $1
