@@ -8,12 +8,25 @@ fi
 ROOTDIR=$(cd $(dirname $(dirname $0)); pwd)
 
 export OONI_GEOIP_DIR=$ROOTDIR/data/geoip
-export OONI_RAW_DIR=.
+export OONI_RAW_DIR=./raw
 export OONI_LOG_LEVEL=DEBUG
 export OONI_DB_IP="127.0.0.1"
 export OONI_DB_PORT="27017"
-export OONI_PUBLIC_DIR=.
-export OONI_SANITISED_DIR=.
+export OONI_PUBLIC_DIR=./public
+export OONI_SANITISED_DIR=./sanitised
+export OONI_ARCHIVE_DIR=./archive
+export OONI_BRIDGE_DB_FILE=$ROOTDIR/etc/bridge_db.json
 
-$ROOTDIR/ooni-pipeline/bin/oonipipeline preprocess $1
-$ROOTDIR/ooni-pipeline/bin/oonipipeline import $1
+WORKDIR=$(pwd)
+TARBALL=$1
+
+install -d ./archive
+install -d ./raw
+install -d ./sanitised
+install -d ./public
+
+$ROOTDIR/ooni-pipeline/bin/oonipipeline preprocess $TARBALL
+$ROOTDIR/ooni-pipeline/bin/oonipipeline sanitise
+$ROOTDIR/ooni-pipeline/bin/oonipipeline import
+
+rm -r ./raw ./sanitised
