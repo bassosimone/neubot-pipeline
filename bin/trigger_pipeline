@@ -12,5 +12,8 @@ export OONI_RAW_DIR=.
 export OONI_LOG_LEVEL=DEBUG
 export OONI_DB_IP="127.0.0.1"
 export OONI_DB_PORT="27017"
+export OONI_PUBLIC_DIR=.
+export OONI_SANITISED_DIR=.
 
 $ROOTDIR/ooni-pipeline/bin/oonipipeline preprocess $1
+$ROOTDIR/ooni-pipeline/bin/oonipipeline import $1
