@@ -14,7 +14,7 @@ fi
     cd $DESTDIR
     wget -N $BASEURL/m-lab/list/$ALL_TARFILES.gz
     zcat $ALL_TARFILES.gz > $ALL_TARFILES
-    sed -i "s|gs:/|$BASEURL|g" $ALL_TARFILES  # GNU-only
+    sed -i "s|^gs:/|$BASEURL|g" $ALL_TARFILES  # GNU-only
 
     while [ $# -gt 0 ]; do
         PATTERN=$1
