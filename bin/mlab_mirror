@@ -1,0 +1,35 @@
+#!/bin/sh -e
+
+ALL_TARFILES=all_mlab_tarfiles.txt
+BASEURL=https://commondatastorage.googleapis.com
+DELAY=3
+DESTDIR=data
+
+if [ $# -eq 0 ]; then
+    echo "usage: $0 project/year/month..." 1>&2
+    exit 1
+fi
+
+(
+    cd $DESTDIR
+    wget -N $BASEURL/m-lab/list/$ALL_TARFILES.gz
+    zcat $ALL_TARFILES.gz > $ALL_TARFILES
+    sed -i "s|gs:/|$BASEURL|g" $ALL_TARFILES  # GNU-only
+
+    while [ $# -gt 0 ]; do
+        PATTERN=$1
+        shift
+        test -d $PATTERN || install -d $PATTERN
+
+        cat $ALL_TARFILES | grep $PATTERN | while read TARBALL_URI; do
+            (
+                cd $PATTERN
+                BASE=`basename $TARBALL_URI`
+                test -f $BASE || {
+                    wget -N $TARBALL_URI || true
+                    sleep $DELAY
+                }
+            )
+        done
+    done
+)
