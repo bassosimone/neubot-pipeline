@@ -10,5 +10,7 @@ ROOTDIR=$(cd $(dirname $(dirname $0)); pwd)
 export OONI_GEOIP_DIR=$ROOTDIR/data/geoip
 export OONI_RAW_DIR=.
 export OONI_LOG_LEVEL=DEBUG
+export OONI_DB_IP="127.0.0.1"
+export OONI_DB_PORT="27017"
 
 $ROOTDIR/ooni-pipeline/bin/oonipipeline preprocess $1
