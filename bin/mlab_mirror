@@ -3,7 +3,7 @@
 ALL_TARFILES=all_mlab_tarfiles.txt
 BASEURL=https://commondatastorage.googleapis.com
 DELAY=3
-DESTDIR=data
+DESTDIR=data/raw
 
 if [ $# -eq 0 ]; then
     echo "usage: $0 project/year/month..." 1>&2
@@ -11,6 +11,7 @@ if [ $# -eq 0 ]; then
 fi
 
 (
+    test -d $DESTDIR || install -d $DESTDIR
     cd $DESTDIR
     wget -N $BASEURL/m-lab/list/$ALL_TARFILES.gz
     zcat $ALL_TARFILES.gz > $ALL_TARFILES
