@@ -5,7 +5,7 @@ ALL_TARFILES=all_mlab_tarfiles.txt
 BASEURL=https://commondatastorage.googleapis.com
 BINDIR=$(cd "$(dirname $0)"; pwd)
 DELAY=3
-DESTDIR=data/raw
+DESTDIR=data/mlab
 KEEP=""
 
 if [ $# -eq 0 ]; then
