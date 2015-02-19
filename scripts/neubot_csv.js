@@ -10,7 +10,8 @@ function qqq(field) {
     return field;
 }
 
-print ("probe_asn, " +
+print ("data_format_version, " +
+       "probe_asn, " +
        "probe_cc, " +
        "probe_ip, " +
        "software_name, " +
@@ -34,7 +35,8 @@ print ("probe_asn, " +
 db.reports.find({
     software_name: "neubot"
 }).forEach(function (result) {
-    print (qqq(result.probe_asn) + ", " +
+    print (qqq(result.data_format_version) + ", " +
+           qqq(result.probe_asn) + ", " +
            qqq(result.probe_cc) + ", " +
            qqq(result.probe_ip) + ", " +
            qqq(result.software_name) + ", " +
