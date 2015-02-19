@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+WGET_FLAGS="--recursive --no-parent -nH --cut-dirs=1 -P data/geoip"
+BASE_URL=http://data.neubot.org/geolite_historic
+
+if [ $1 ]; then
+    while [ $1 ]; do
+        wget $WGET_FLAGS $BASE_URL/$1/
+        shift
+    done
+else
+    wget $WGET_FLAGS $BASE_URL/
+fi
+find data/geoip -type f -name \*.gz -exec gunzip {} \;

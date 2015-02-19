@@ -42,19 +42,33 @@ install all of this with the following command:
     sudo apt-get install mongodb python-geoip python-pymongo \
                          python-tz python-yaml
 
+### Download GeoLite databases
+
 In addition you also need to [download the free GeoLite City and
 ASN databases from MaxMind](http://dev.maxmind.com/geoip/legacy/geolite/).
 
-Neubot's pipeline currently assumes that you have the uncompressed
-`GeoLiteCity.dat` and `GeoIPASNum.dat` databases in the `data` folder,
-and specifically it assumes that you have a copy of such databases
-for each year and month that you are interested to analyze. For example,
-if I want to analyze January, 2015 data, my data folder needs to look
-like this:
+Specifically you need to create below data a per-year and per-month
+folders containing uncompressed GeoLite databases.
 
-    $ find data/geoip/ -type f
-    data/geoip/2015/01/GeoLiteCity.dat
-    data/geoip/2015/01/GeoIPASNum.dat
+To this end, you can use the script `./bin/fetch_geoip` that downloads
+a mirror of the GeoLite data maintained at `data.neubot.org`:
+
+    ./bin/fetch_geoip
+
+The script also accepts parameters to allow you to download only
+the GeoLite files that you need, e.g.:
+
+    ./bin/fetch_geoip 2014/11 2014/12
+
+Note that the GeoLite databases downloaded using this procedure are
+not always the best GeoLite databases for all months. In fact many of
+these databases were downloaded recently using the [Internet
+Archive's wayback machine](http://archive.org/web/). So there are
+months in which the GeoLite database used is more than six months old
+which [has an impact on accuracy](://www.maxmind.com/en/geoip2-city-database-accuracy).
+
+It is in our (well, in my...) TODO list to improve the way in
+which geolocation is implemented.
 
 ### Pull and process data
 
