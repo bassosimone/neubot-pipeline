@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-
 ALL_TARFILES=all_mlab_tarfiles.txt
 BASEURL=https://commondatastorage.googleapis.com
 BINDIR=$(cd "$(dirname $0)"; pwd)
