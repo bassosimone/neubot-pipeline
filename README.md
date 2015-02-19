@@ -1,7 +1,10 @@
 # Neubot Pipeline
 
-This repository contains an experimental (alpha stage!) pipeline
-for importing and process Neubot data.
+This repository contains an experimental (alpha stage!) pipeline for
+importing and processing data available at
+[Measurement Lab](http://www.measurementlab.net/). It is called Neubot
+pipeline because it was developed by Simone Basso in the context of
+the [Neubot project](http://www.neubot.org/).
 
 ## How to clone neubot-pipeline
 
