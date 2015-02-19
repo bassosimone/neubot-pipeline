@@ -87,7 +87,7 @@ correctly imported
 This piece of software is deeply based on
 [ooni-pipeline](https://github.com/TheTorProject/ooni-pipeline), the
 data import and processing pipeline developed by the
-[OONI project]()https://ooni.torproject.org/.
+[OONI project](https://ooni.torproject.org/).
 
 The Glasnost logfiles parser is a modified version of [the parser
 developed by Hadi Asghari for Glasnost](https://code.google.com/p/glasnost/source/browse/#git%2Fpython_parser%2Fparser).
