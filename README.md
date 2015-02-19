@@ -96,6 +96,17 @@ correctly imported
     > db.reports.find()
     ...   # skipped output here
 
+### Export data as CSV
+
+To export data as CSV, use the `bin/export_csv` script. It can export
+data of Neubot and Glasnost as follows:
+
+    ./bin/export_csv neubot
+
+or:
+
+    ./bin/export_csv glasnost
+
 ## Acknowledgments
 
 This piece of software is deeply based on
